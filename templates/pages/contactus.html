@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static%}
+{% load humanize %}
+{% block title %} | Contact Us {% endblock %}
+{% block content %}
+<!-- **** Breadcrumb Area Start **** -->
+<div class="breadcrumb-area bg-img bg-overlay-3 wow fadeInUp" data-wow-delay="200ms" style="background-image: url({% static 'img/bg-img/contact.jpg' %});">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                        </ol>
+                    </nav>
+                    <h2 class="page-title">Contact Us</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- **** Breadcrumb Area End **** -->
+<!-- alerts -->
+{% include 'partials/_alerts.html' %}
+<!-- **** Contact Area Start **** -->
+<section class="rehomes-support-and-contact-area section-padding-80-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="contact-information-area mb-80">
+                    <!-- Title -->
+                    <div class="support-title wow fadeInUp" data-wow-delay="200ms">
+                        <h2>Need Help ?</h2>
+                    </div>
+
+                    <!-- Support Area Content -->
+                    <div class="support-area-content d-flex align-items-center wow fadeInUp" data-wow-delay="200ms">
+                        <!-- Support Person Thumb -->
+                        <div class="support-perosn-thumb">
+                            <img src="{% static 'img/bg-img/malecr.jpg' %}" alt="">
+                        </div>
+                        <div class="supprto-meta">
+                            <h4>Seble Chala</h4>
+                            <p>Customer Realations</p>
+                            <p>+251 96 753 3467</p>
+                            <p>seble@michu-properties.com</p>
+                        </div>
+                    </div>
+
+                    <!-- Support Area Content -->
+                    <div class="support-area-content d-flex align-items-center wow fadeInUp" data-wow-delay="200ms">
+                        <!-- Support Person Thumb -->
+                        <div class="support-perosn-thumb">
+                            <img src="{% static 'img/bg-img/malecr2.png' %}" alt="">
+                        </div>
+                        <div class="supprto-meta">
+                            <h4>Yonas Negash</h4>
+                            <p>Customer Realations</p>
+                            <p>+251 92 888 0027</p>
+                            <p>yonas@michu-properties.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <!-- Leave A Reply -->
+                <div class="rehomes-contact-form mb-80 wow fadeInUp" data-wow-delay="200ms">
+                    <!-- Title -->
+                    <div class="support-title">
+                        <h2>Get In Touch</h2>
+                    </div>
+
+                    <!-- Form -->
+                    <form class="support-form" action="{% url 'help' %}" method="post">
+                            {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12">
+                                <input type="text" name="message-name" class="form-control mb-20" placeholder="Your Name">
+                            </div>
+                            <div class="col-12">
+                                <input type="email" name="message-email" class="form-control mb-20" placeholder="Email">
+                            </div>
+                            <div class="col-12">
+                                <textarea name="message" class="form-control mb-30" placeholder="Messages"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn rehomes-btn">Send Messages</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- **** Contact Area End **** -->
+
+<!-- Choose us area -->
+{% include 'partials/_partnership.html' %}
+{% endblock %}

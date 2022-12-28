@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+{% load static %}
+{% block title %} | Browse Property Listings {% endblock %}
+{% block content %}
+<!-- **** Location Search Form Area **** -->
+<div class="rehomes-search-form-area">
+        <div class="container">
+            <div class="rehomes-search-form">
+                <form action="{% url 'search' %}">
+                    <div class="row">
+                        <div class="col-12 col-lg-10">
+                                <div class="row">
+                                        <div class="col-12 col-md-6 col-lg-3">
+                                            <div class="form-check">
+                                                <input type="checkbox" name="forrent" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1" style="color: white;"> Search for rent only</label>
+                                            </div>
+                                        </div>
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        <input type="text" name="keywords" class="form-control" placeholder="Keywords" value="{{ values.keywords }}">
+                                    </div>
+                                    
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        <select name="city" id="city" class="form-control">
+                                            <option selected="true" disabled="disabled">City (All)</option>
+                                            {% for key, value in city_choices.items %}
+                                                <option value="{{ key }}"
+                                                {% if key == values.city %}
+                                                    selected
+                                                {% endif %}
+                                                > {{ value }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        <select name="bedrooms" id="bedrooms" class="form-control">
+                                            <option selected="true" disabled="disabled">Bedrooms (All)</option>
+                                            {% for key, value in bedroom_choices.items %}
+                                                <option value="{{ key }}"
+                                                {% if key == values.bedrooms %}
+                                                    selected
+                                                {% endif %}
+                                                > {{ value }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <select name="bathrooms" id="bathrooms" class="form-control">
+                                            <option selected="true" disabled="disabled">Bathrooms (All)</option>
+                                            {% for key, value in bathroom_choices.items %}
+                                                <option value="{{ key }}"
+                                                {% if key == values.bathrooms %}
+                                                    selected
+                                                {% endif %}
+                                                > {{ value }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                            <select name="price" id="price" class="form-control">
+                                                <option selected="true" disabled="disabled">Price (All)</option>
+                                                {% for key, value in price_choices.items %}
+                                                    <option value="{{ key }}"
+                                                    {% if key == values.price %}
+                                                    selected
+                                                    {% endif %}
+                                                    > {{ value }}</option>
+                                                {% endfor %}
+                                            </select>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                            <select name="sqft" id="sqft" class="form-control">
+                                                <option selected="true" disabled="disabled">Sqft (All)</option>
+                                                {% for key, value in sqft_choices.items %}
+                                                    <option value="{{ key }}"
+                                                    {% if key == values.sqft %}
+                                                    selected
+                                                    {% endif %}
+                                                    > {{ value }}</option>
+                                                {% endfor %}
+                                            </select>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="col-12 col-lg-2">
+                            <button type="submit" class="btn rehomes-search-btn">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- **** Location Search Form Area **** -->
+<!-- **** Breadcrumb Area Start **** -->
+<div class="breadcrumb-area-two mt-50 wow fadeInUp" data-wow-delay="200ms">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-content-two">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Featured Listings</li>
+                            </ol>
+                        </nav>
+                        <h2 class="page-title">Property Listings</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- **** Breadcrumb Area End **** -->
+
+    <!-- **** Sale area Start **** -->
+    <section class="rehome-house-sale-area section-padding-80">
+        <div class="container">
+            <div class="row">
+                {% if listings %}
+                    {% for listing in listings %}
+                        <!-- Single Property Area -->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="single-property-area wow fadeInUp" data-wow-delay="200ms">
+                                <!-- Property Thumb -->
+                                <div class="property-thumb">
+                                    <a href="{% url 'listing' listing.id %}"><img src="{{ listing.photo_main.url }}" alt=""></a>
+                                 </div>
+                                <!-- {% if photos %}
+                                    {% for photo in photos %}
+                                    {% if photo.show_id == listing.id %}
+                                        <div class="property-thumb">
+                                            <a href="{% url 'listing' listing.id %}"><img src="{{ photo.photo.url }}" alt=""></a>
+                                         </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                {% endif %} -->
+                                <!-- Property Description -->
+                                <div class="property-desc-area">
+                                    <!-- Property Title & Seller -->
+                                    <div class="property-title-seller d-flex justify-content-between">
+                                        <!-- Title -->
+                                        <div class="property-title">
+                                            <h4><a href="{% url 'listing' listing.id %}">{{ listing.title }}</a></h4>
+                                            <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{ listing.address }}</p>
+                                        </div>
+                                        <!-- Seller -->
+                                        <div class="property-seller">
+                                            <p>Agent:</p>
+                                            <h6>{{ listing.realtor }}</h6>
+                                        </div>
+                                    </div>
+                                    <!-- Property Info -->
+                                    <div class="property-info-area d-flex flex-wrap">
+                                        <p>Sq Meter: <span>{{ listing.property_size }} m2</span></p>
+                                        <p>Garage: <span>{{ listing.garage }}</span></p>
+                                        <p>Bedrooms: <span>{{ listing.bedrooms }}</span></p>
+                                        <p>Baths: <span>{{ listing.bathrooms }}</span></p>
+                                    </div>
+                                    <p><span>{{ listing.list_date | timesince }}</span> ago</p>
+                                </div>
+        
+                                <!-- Property Price -->
+                                <div class="property-price">
+                                    {% if listing.is_for_rent %}
+                                        <a class="badge-rent" href="{% url 'listing' listing.id %}">For Rent</a>
+                                        <p class="price">{{ listing.price | intcomma }} {{ listing.currency.name }} per Month</p>
+                                    {% else %}
+                                        <a class="badge-sale" href="{% url 'listing' listing.id %}">For Sale</a>
+                                        <p class="price">{{ listing.price | intcomma }} {{ listing.currency.name }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No listings available</p>
+                {% endif %}
+
+            </div>
+
+            <div class="row">
+                    <!-- Pagination and Page Counter Area -->
+                    <div class="col-12">
+                        <div class="rehomes-pagination-counter mt-15 d-flex flex-wrap justify-content-between align-items-center wow fadeInUp" data-wow-delay="200ms">
+                            <!-- Pagination -->
+                            <nav class="rehomes-pagination">
+                                {% if listings.has_other_pages %}
+                                <ul class="pagination">
+                                    {% if listings.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{listings.previous_page_number}}"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <a class="page-link"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</a>
+                                        </li>
+                                    {% endif %}
+                                    {% for i in listings.paginator.page_range %}
+                                        {% if listings.number == i %}
+                                            <li class="page-item">
+                                                <a class="page-link active">{{i}}</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{i}}">{{i}}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if listings.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{listings.next_page_number}}">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <a class="page-link">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                        </li>
+                                    {% endif %}
+    
+                                </ul>
+                                {% endif %}
+                            </nav>
+    
+                            <!-- Page Counter -->
+                            <div class="page-counter">
+                                <!-- <p>Page <span>{{ page.start_index }}</span> of <span>{{ page.paginator.count }}</span> results</p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+    <!-- **** Sale Area End **** -->
+
+<!-- Choose us area -->
+{% include 'partials/_partnership.html' %}
+{% endblock %}

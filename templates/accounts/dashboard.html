@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %} | User Dashboard {% endblock %}
+{% block content %}
+<!-- **** Breadcrumb Area Start **** -->
+<div class="breadcrumb-area bg-img bg-overlay-3 wow fadeInUp" data-wow-delay="200ms" style="background-image: url({% static 'img/bg-img/66.jpg' %});">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                        </ol>
+                    </nav>
+                    <h2 class="page-title">User Dashboard</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- **** Breadcrumb Area End **** -->
+<!-- alerts -->
+<br>
+{% include 'partials/_alerts.html' %}
+<!-- **** About Us Area Start **** -->
+<section class="about-us-area section-padding-100-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="about-us-title mb-40 wow fadeInUp" data-wow-delay="200ms">
+                    <h2>Hello! Welcome <span>{{ user.first_name }}</span></h2>
+                    {% if contacts %}
+                    <p>Here are the property listings that you have inquired about.</p>
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Property</th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for contact in contacts %}
+                                <tr>
+                                  <td>{{ contact.id }}</td>
+                                  <td>{{ contact.listing }}</td>
+                                  <td>
+                                    <a class="btn btn-light" href="{% url 'listing' contact.listing_id %}">View Listing</a>
+                                  </td>
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <div class="col-md-12">
+                            <p>You have no listing inquiries yet.</p>
+                        </div>
+                    {% endif %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- **** About Us Area End **** -->
+
+<!-- Choose us area -->
+{% include 'partials/_partnership.html' %}
+{% endblock %}

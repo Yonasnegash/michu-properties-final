@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %} | About Us {% endblock %}
+{% block content %}
+<!-- **** Breadcrumb Area Start **** -->
+<div class="breadcrumb-area bg-img bg-overlay-3 wow fadeInUp" data-wow-delay="200ms" style="background-image: url({% static 'img/bg-img/30.jpg' %});">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">About</li>
+                        </ol>
+                    </nav>
+                    <h2 class="page-title">About Us</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- **** Breadcrumb Area End **** -->
+
+<!-- **** About Us Area Start **** -->
+<section class="about-us-area section-padding-100-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="about-us-title mb-40 wow fadeInUp" data-wow-delay="200ms">
+                    <h2>Hello! Welcome to Michu<span>Properties.</span></h2>
+                    <p>Michu Properties is a commercial property management company. Established to give any service related to buying, selling, renting and consultancy starting from individual to real-estate homes. Michu Properties offers a comprehensive list of for-sale and for-rent properties, as well as the information and tools to make informed home buying decisions. 
+                    </p>
+                </div>
+            </div>
+
+            <!-- Single About Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-about-content wow fadeInUp" data-wow-delay="200ms">
+                    <!-- Thumb -->
+                    <div class="single-about-thumb">
+                        <img src="{% static 'img/bg-img/business-and-trade.png' %}" alt="">
+                    </div>
+                    <h4>Our Company</h4>
+                    <p>Offers a comprehensive list of for-sale, for-rent properties, as well as the information and tools to make informed real estate decisions. </p>
+                </div>
+            </div>
+
+            <!-- Single About Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-about-content wow fadeInUp" data-wow-delay="200ms">
+                    <!-- Thumb -->
+                    <div class="single-about-thumb">
+                        <img src="{% static 'img/bg-img/binoculars128.png' %}" alt="">
+                    </div>
+                    <h4>Our Vision</h4>
+                    <p>Providing technological and advanced features for selling and buying homes. To become the leading real-estate broker in ethiopia.</p>
+                </div>
+            </div>
+
+            <!-- Single About Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-about-content wow fadeInUp" data-wow-delay="200ms">
+                    <!-- Thumb -->
+                    <div class="single-about-thumb">
+                        <img src="{% static 'img/bg-img/badge_gold.png' %}" alt="">
+                    </div>
+                    <h4>Our Quality</h4>
+                    <p>We are Available 24/7 to satisfy our customers, fast response on messanger and telegram. Call us!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- **** About Us Area End **** -->
+
+    <!-- Choose us area -->
+    {% include 'partials/_chooseus.html' %}
+
+<!-- Choose us area -->
+{% include 'partials/_partnership.html' %}
+{% endblock %}

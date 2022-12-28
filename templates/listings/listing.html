@@ -1,0 +1,364 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+{% block title %} | {{ listing.title }} {% endblock %}
+{% block content %}
+<!-- alerts -->
+{% include 'partials/_alerts.html' %}
+<!-- **** Properties Hero Area Start **** -->
+<div class="properties-hero-area d-flex flex-wrap align-items-center mb-80">
+        <div class="properties-slide">
+            <!-- Properties Slider -->
+            <div id="property-thumb-silde" class="carousel slide wow fadeInUp" data-wow-delay="200ms" data-ride="carousel">
+                  <!-- Home Main Image -->
+        <img src="{{ listing.photo_main.url }}" alt="" class="img-main img-fluid mb-3">
+        <!-- Thumbnails -->
+        <div class="row mb-5 thumbs">
+                {% if photos %}
+                    {% for photo in photos %}
+                    {% if photo.show_id == listing.id %}
+                        <div class="col-md-2">
+                            <a href="{{ photo.photo.url }}" data-lightbox="home-images">
+                            <img src="{{ photo.photo.url }}" alt="" class="img-fluid">
+                            </a>
+                        </div>
+                        <!-- <div class="property-thumb">
+                            <a href="{% url 'listing' listing.id %}"><img src="{{ photo.photo.url }}" alt=""></a>
+                            </div> -->
+                    {% endif %}
+                    {% endfor %}
+                {% endif %}
+        </div>
+            </div>
+        </div>
+
+        <!-- Properties Content Area -->
+        <div class="properties-content-area wow fadeInUp" data-wow-delay="200ms">
+            <div class="properties-content-info">
+                <h2>{{ listing.title }}</h2>
+                <div class="properties-location">
+                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{ listing.address }}</p>
+                    <p>Type: {{ listing.home_type }}</p>
+                </div>
+                {% if listing.is_for_rent %}
+                    <h4 class="properties-rate">${{ listing.price | intcomma }} <span>Per Month</span></h4>
+                {% else %}
+                    <h4 class="properties-rate">{{ listing.price | intcomma }} <span>Birr</span></h4>
+                {% endif %}
+                <!-- <p>Buy Confidence, Sell With Success! Our storied approach to real estate development and maximization.</p> -->
+                <!-- Properties Info -->
+                <div class="properties-info">
+                    <p>Sq Meter: <span>{{ listing.property_size }} m2</span></p>
+                    <p>Bedrooms: <span>{{ listing.bedrooms }}</span></p>
+                    <p>Garage: <span>{{ listing.garage }}</span></p>
+                    <p>Bathrooms: <span>{{ listing.bathrooms }}</span></p>
+                </div>
+                <hr>
+                <p>{{ listing.description }}</p>
+                <button class="btn rehomes-btn mt-10" data-toggle="modal" data-target="#inquiryModal">Make Request</button>
+                <p class="d-flex flex-wrap"><span>or Call Agent</span> <span> <i class="fa fa-phone" aria-hidden="true"></i> +251 96 753 3467</span></p>
+            </div>
+        </div>
+    </div>
+    <!-- **** Properties Hero Area End **** -->
+
+    <!-- **** Properties-area Start **** -->
+    <div class="rehomes-properties-area">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-12 col-lg-8">
+                    <!-- Information Area -->
+                    <div class="information-area mb-80 wow fadeInUp" data-wow-delay="200ms">
+                        <h4 class="mb-30">Infomation</h4>
+
+                        <!--Information Content -->
+                        <div class="information-content">
+                            <ul class="d-flex flex-wrap">
+                                <li><span>Price</span> <span>{{ listing.price | intcomma }} Birr</span></li>
+                                <li><span>Property Type</span> <span>{{ listing.home_type }}</span></li>
+                                <li><span>Rooms</span> <span>{{ listing.total_rooms }}</span></li>
+                                <li><span>Bedrooms</span> <span>{{ listing.bedrooms }}</span></li>
+                                <li><span>Bathrooms</span> <span>{{ listing.bathrooms }}</span></li>
+                                <li><span>Parking lots</span> <span>{{ listing.parking_lot }}</span></li>
+                                <li><span>Agent</span> <span>{{ listing.realtor }}</span></li>
+                                <li><span>City</span> <span>{{ listing.city }}</span></li>
+                                <li><span>Garages</span> <span>2</span></li>
+                                <li><span>Real Esate</span> <span>{{ listing.realestate }}</span></li>
+                                <li><span>Lot Size</span> <span>{{ listing.lot_size }}</span></li>
+                                <li><span>Sqft</span> <span>{{ listing.sqft }}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Virtual Tour Content Begins here -->
+
+                    <div class="floor-thumb-content mb-80 wow fadeInUp" data-wow-delay="200ms">
+                        <h4 class="mb-30">Virtual Tour</h4>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            {% if listing.floor_plan_image1 %}
+                                <!-- Floor Thumb -->
+                                <!-- <div class="floor-thumb">
+                                    <img src="{{ listing.floor_plan_image1.url }}" alt="">
+                                </div> -->
+
+                                <a-scene embedded>
+                                    <a-sky src="{{ listing.floor_plan_image1.url }}" alt=""> </a-sky>
+                                </a-scene>
+                                <!-- <div class="floor-thumb">
+                                </div> -->
+                            {% else %}
+                            <p>Not provided</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            {% if listing.floor_plan_image2 %}   
+                                Floor Thumb
+                                <div class="floor-thumb">
+                                    <img src="{{ listing.floor_plan_image2.url }}" alt="">
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            {% if listing.floor_plan_image3 %}   
+                                Floor Thumb
+                                <div class="floor-thumb">
+                                    <img src="{{ listing.floor_plan_image3.url }}" alt="">
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Virtual Tour Content Ends here -->
+
+                    <!-- Floor Thumb Content -->
+                    <div class="floor-thumb-content mb-80 wow fadeInUp" data-wow-delay="200ms">
+                        <h4 class="mb-30">Floor Plans</h4>
+                                {% if listing.floor_plan_image1 %}
+                                    <!-- Floor Thumb -->
+                                    <div class="floor-thumb">
+                                        <img src="{{ listing.floor_plan_image1.url }}" alt="">
+                                    </div>
+                                    <!-- <div class="floor-thumb">
+                                    </div> -->
+                                {% else %}
+                                <p>Not provided</p>
+                                {% endif %}
+                                {% if listing.floor_plan_image2 %}   
+                                    <!-- Floor Thumb -->
+                                    <div class="floor-thumb">
+                                        <img src="{{ listing.floor_plan_image2.url }}" alt="">
+                                    </div>
+                                {% endif %}
+                                {% if listing.floor_plan_image3 %}   
+                                    <!-- Floor Thumb -->
+                                    <div class="floor-thumb">
+                                        <img src="{{ listing.floor_plan_image3.url }}" alt="">
+                                    </div>
+                                {% endif %}
+                                {% if listing.floor_plan_image4 %}   
+                                    <!-- Floor Thumb -->
+                                    <div class="floor-thumb">
+                                        <img src="{{ listing.floor_plan_image4.url }}" alt="">
+                                    </div>
+                                {% endif %}
+                                {% if listing.floor_plan_image5 %}   
+                                    <!-- Floor Thumb -->
+                                    <div class="floor-thumb">
+                                        <img src="{{ listing.floor_plan_image5.url }}" alt="">
+                                    </div>
+                                {% endif %}
+                    </div>
+
+                    <!-- Agent Information -->
+                    <div class="agent-information-area mb-80 wow fadeInUp" data-wow-delay="200ms">
+                        <h4 class="mb-30">Agent Infomation</h4>
+
+                        <!-- Agent Information Info -->
+                        <div class="agent-information-info d-flex align-items-center">
+                            <!-- Agent Thumb -->
+                            <div class="agent-thumb">
+                                <img src="{{ listing.realtor.photo.url }}" alt="">
+                            </div>
+                            <!-- Agent Info -->
+                            <div class="agent-info">
+                                <h4>{{ listing.realtor }}</h4>
+                                <!-- Agent Contact -->
+                                <div class="agent-contact d-flex justify-content-between">
+                                <p>Phone: <span>{{ listing.realtor.phone }}</span></p>
+                                    <p>Email: <span>{{ listing.realtor.email }}</span></p>
+                                </div>
+                                <p> {{ listing.realtor.description }} </p>
+                                <button class="btn rehomes-btn mt-10" data-toggle="modal" data-target="#inquiryModal">Make Request</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Sidebar Area -->
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                    <div class="rehomes-property-sidebar-area">
+                       
+                        <!-- Property Search Form -->
+                        <div class="property-search-form-area mb-80 wow fadeInUp" data-wow-delay="200ms">
+                            <h4 class="mb-30">Search Properties</h4>
+
+                            <form action="{% url 'search' %}">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <!-- Search Btn -->
+                                        <div class="search-property-btn">
+                                            <!-- <fieldset class="form-group">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="rehomesbuy" id="buy" value="buy" checked>
+                                                    <label class="form-check-label" for="buy">Buy</label>
+                                                </div>
+                                                
+                                            </fieldset> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        
+                                            <input type="text" name="keywords" class="form-control" placeholder="Keywords">
+                                        <br>
+                                    </div>
+                                    <div class="col-12">
+                                        <select name="city" id="city" class="form-control">
+                                            <option selected="true" disabled="disabled">City (All)</option>
+                                            {% for key, value in city_choices.items %}
+                                                <option value="{{ key }}"> {{ value }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                            <select name="bedrooms" id="bedrooms" class="form-control">
+                                                    <option selected="true" disabled="disabled">Bedrooms (All)</option>
+                                                    {% for key, value in bedroom_choices.items %}
+                                                        <option value="{{ key }}"> {{ value }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                    </div>
+                                    <div class="col-12">
+                                            <select name="bathrooms" id="bathrooms" class="form-control">
+                                                    <option selected="true" disabled="disabled">Bathrooms (All)</option>
+                                                    {% for key, value in bathroom_choices.items %}
+                                                        <option value="{{ key }}"> {{ value }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                    </div>
+                                    <div class="col-12">
+                                            <select name="price" id="price" class="form-control">
+                                                    <option selected="true" disabled="disabled">Max Price (All)</option>
+                                                    {% for key, value in price_choices.items %}
+                                                        <option value="{{ key }}"> {{ value }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                    </div>
+                                    <div class="col-12">
+                                            <select name="sqft" id="sqft" class="form-control">
+                                                    <option selected="true" disabled="disabled">Sqft (All)</option>
+                                                    {% for key, value in sqft_choices.items %}
+                                                        <option value="{{ key }}"> {{ value }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                    </div>
+                                    <div class="col-12">
+                                            <div class="form-check">
+                                                <input type="checkbox" name="forrent" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1"> Search for rent only</label>
+                                            </div>
+                                        </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn rehomes-btn mt-15 w-100">Search Property</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Single Properties Widget Area -->
+                        <div class="properties-single-widget-area mb-80 wow fadeInUp" data-wow-delay="200ms">
+                            <h4 class="widget-title mb-30">Recent Properties</h4>
+
+                            {% if recent_listings %}
+                                {% for recent_listing in recent_listings %}
+                                    <!-- Single Recent Post -->
+                                    <div class="single-recent-post d-flex align-items-center">
+                                        <!-- Thumb -->
+                                        <div class="properties-post-thumb">
+                                            <a href="{% url 'listing' recent_listing.id %}"><img src="{{ recent_listing.photo_main.url }}" alt=""></a>
+                                        </div>
+                                        <!-- Post Content -->
+                                        <div class="post-content">
+                                            <a href="{% url 'listing' recent_listing.id %}" class="post-title">{{ recent_listing.title }}</a>
+                                            <p class="properties--location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ recent_listing.address }}</p>
+                                            {% if recent_listing.is_for_rent %}
+                                                <p class="properties--rent">Rent: <span>${{ recent_listing.price | intcomma }} per Month</span></p>
+                                            {% else %}
+                                                <p class="properties--rent">Sale: <span>{{ recent_listing.price | intcomma }} Birr</span></p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                            <p>No recent listings</p>
+                            {% endif %}
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- **** Properties-area End **** -->
+
+<!-- Choose us area -->
+{% include 'partials/_partnership.html' %}
+    <!-- Inquiry Modal -->
+    <div class="modal fade" id="inquiryModal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="inquiryModalLabel">Make An Inquiry</h5>
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'contact' %}" method="POST">
+                    {% csrf_token %}
+                    {% if user.is_authenticated %}
+                      <input type="hidden" name="user_id" value="{{ user.id }}">
+                    {% else %}
+                      <input type="hidden" name="user_id" value="0">
+                    {% endif %}
+                    <input type="hidden" name="realtor_email" value="{{ listing.realtor.email">
+                    <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                    <div class="form-group">
+                      <label for="property_name" class="col-form-label">Property:</label>
+                      <input type="text" name="listing" class="form-control" value="{{ listing.title }}">
+                    </div>
+                    <div class="form-group">
+                      <label for="name" class="col-form-label">Name:</label>
+                      <input type="text" name="name" class="form-control" {% if user.is_authenticated %} value="{{ user.first_name }} {{ user.last_name }}" {% endif %} required>
+                    </div>
+                    <div class="form-group">
+                      <label for="email" class="col-form-label">Email:</label>
+                      <input type="email" name="email" class="form-control" {% if user.is_authenticated %} value="{{ user.email }}" {% endif %} required>
+                    </div>
+                    <div class="form-group">
+                      <label for="phone" class="col-form-label">Phone:</label>
+                      <input type="text" name="phone" class="form-control" {% if user.is_authenticated %} value="{{ user.phone }}" {% endif %} >
+                    </div>
+                    <div class="form-group">
+                      <label for="message" class="col-form-label">Message:</label>
+                      <textarea name="message" class="form-control">I am interested</textarea>
+                    </div>
+                    <hr>
+                    <input type="submit" value="Send" class="btn btn-block btn-secondary">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+{% endblock %}
