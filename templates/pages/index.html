@@ -19,7 +19,18 @@
 <body>
   <div class="background-image">
     <div class="card">
-      <img src="{% static 'img/core-img/michu_property_management_logo.png' %}" alt="Logo" class="logo">
+      <div class="logo-container">
+        <img src="{% static 'img/core-img/michu_property_management_logo.png' %}" alt="Logo" class="logo">
+        <div class="sister-company">
+          <a href="{% url 'travelagency' %}">
+            <img src="{% static 'img/core-img/Omedla_Travel_Agency_LLC_Final_01.png' %}" alt="Logo" class="logo">
+          </a>
+          <br>
+          <a href="{% url 'travelagency' %}">
+            <h4>Check out our sister company</h4>
+          </a>
+        </div>
+      </div>
       <h1>Coming Soon</h1>
       <p>Get notified when we launch.</p>
       <form class="notification-form" action="{% url 'index' %}" method="POST">
@@ -29,10 +40,10 @@
       </form>
       <br>
       <!-- alerts -->
-    {% include 'partials/_alerts.html' %}
+      {% include 'partials/_alerts.html' %}
     </div>
   </div>
-<!-- **** All JS Files ***** -->
+  <!-- **** All JS Files ***** -->
     <!-- jQuery 2.2.4 -->
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <!-- Popper -->

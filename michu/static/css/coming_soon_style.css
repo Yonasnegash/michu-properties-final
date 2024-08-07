@@ -1,87 +1,121 @@
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
-  
-  .background-image {
-    background-image: url('../img/bg-img/bg_home2.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .card {
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-    padding: 40px;
-    text-align: center;
-    width: 100%;
-    margin: 200px;
-    height: 600px;
-  }
-  
-  .logo {
-    width: 280px; /* Adjust the width of the logo as needed */
-    height: 150px;
-  }
-  
-  h1 {
-    margin-top: 80px;
-    margin-bottom: 0;
-    font-size: 50px;
-    color: #00416A;
-  }
-  
-  p {
-    margin-top: 20px;
-  }
-  
-  .notification-form {
-    margin-top: 10px;
-  }
-  
-  .notification-form input[type="email"] {
-    width: 50%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-right: 10px;
-  }
-  
-  .notification-form button {
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: #00416A;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.background-image {
+background-image: url('../img/bg-img/bg_home2.jpg');
+background-size: cover;
+background-position: center;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.card {
+background-color: rgba(255, 255, 255, 0.8);
+border-radius: 10px;
+padding: 40px;
+text-align: center;
+width: 100%;
+margin: 200px;
+height: 600px;
+}
+
+.logo-container {
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+}
+
+.logo {
+width: 280px; /* Adjust the width of the logo as needed */
+height: 150px;
+margin-right: 20px; /* Add some space between the logos */
+}
+
+.sister-company {
+text-align: left; /* Align text and image in the sister company div */
+}
+
+.sister-company h2 {
+margin-top: 0;
+font-size: 24px;
+color: #00416A;
+}
+
+.sister-logo {
+width: 280px; /* Adjust the width of the sister logo as needed */
+height: 150px;
+}
+
+h1 {
+margin-top: 80px;
+margin-bottom: 0;
+font-size: 50px;
+color: #00416A;
+}
+
+h4 {
+  margin-top: 20px;
+  margin-bottom: 0;
+  font-size: 20px;
+  color: #00416A;
   }
 
-  .notification-form button:hover {
-    background-color: #000;
-  }
-  
+p {
+margin-top: 20px;
+}
 
-  /* Media queries for responsiveness */
+.notification-form {
+margin-top: 10px;
+}
+
+.notification-form input[type="email"] {
+width: 50%;
+padding: 10px;
+border-radius: 5px;
+border: 1px solid #ccc;
+margin-right: 10px;
+}
+
+.notification-form button {
+padding: 10px 20px;
+border-radius: 5px;
+background-color: #00416A;
+color: #fff;
+border: none;
+cursor: pointer;
+}
+
+.notification-form button:hover {
+background-color: #000;
+}
+
+/* Media queries for responsiveness */
 @media (max-width: 768px) {
-    .card {
-      padding: 20px;
-      margin: 50px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    .logo {
-      width: 300px; /* Adjust the width of the logo for smaller screens */
-      height: 150px;
-    }
-    
-    .notification-form input[type="email"] {
-      width: 60%;
-    }
-  }
+.card {
+  padding: 20px;
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-container {
+  flex-direction: column; /* Stack the logos vertically on smaller screens */
+}
+
+.logo, .sister-logo {
+  width: 300px; /* Adjust the width of the logos for smaller screens */
+  height: 150px;
+  margin-right: 0; /* Remove the right margin on smaller screens */
+  margin-bottom: 10px; /* Add some space between the logos on smaller screens */
+}
+
+.notification-form input[type="email"] {
+  width: 60%;
+}
+}

@@ -49,3 +49,6 @@ def contactus(request):
 
 def comingsoon(request):
     return render(request, 'pages/coming_soon.html')
+
+def travelagency(request):
+    return render(request, 'pages/travel_agency.html')
