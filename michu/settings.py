@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'multiselectfield',
     # 'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'fontawesomefree'
 ]
 
 MIDDLEWARE = [

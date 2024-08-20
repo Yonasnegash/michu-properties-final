@@ -57,7 +57,7 @@
                 <hr>
                 <p>{{ listing.description }}</p>
                 <button class="btn rehomes-btn mt-10" data-toggle="modal" data-target="#inquiryModal">Make Request</button>
-                <p class="d-flex flex-wrap"><span>or Call Agent</span> <span> <i class="fa fa-phone" aria-hidden="true"></i> +251 96 753 3467</span></p>
+                <p class="d-flex flex-wrap"><span>or Call Agent</span> <span> <i class="fa fa-phone" aria-hidden="true"></i> +2519 47 222220</span></p>
             </div>
         </div>
     </div>
@@ -90,6 +90,16 @@
                             </ul>
                         </div>
                     </div>
+
+                    <!-- Video Content Begins here -->
+                    {% if listing.video %}
+                    <video width="730" height="640" controls>
+                        <source src="{{ listing.video.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                      </video>
+                    {% else %}
+                    <!-- <p>Not provided</p> -->
+                    {% endif %}
 
                     <!-- Virtual Tour Content Begins here -->
                     {% if listing.floor_plan_image1 %}
@@ -174,7 +184,7 @@
 
                     <!-- Agent Information -->
                     <div class="agent-information-area mb-80 wow fadeInUp" data-wow-delay="200ms">
-                        <h4 class="mb-30">Agent Infomation</h4>
+                        <h4 class="mb-30 mt-30">Agent Infomation</h4>
 
                         <!-- Agent Information Info -->
                         <div class="agent-information-info d-flex align-items-center">

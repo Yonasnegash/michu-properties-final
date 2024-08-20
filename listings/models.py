@@ -43,7 +43,7 @@ class Listing(models.Model):
     property_size = models.DecimalField(max_digits=5, decimal_places=1)
     land_area = models.DecimalField(max_digits=5, decimal_places=1)
     property_type = models.ForeignKey(PropertyType, on_delete=models.DO_NOTHING)
-    feature = MultiSelectField(max_length=100, choices=FEATURES)
+    feature = MultiSelectField(max_length=1000, choices=FEATURES)
     year_built = models.IntegerField(default=0)
     currency = models.ForeignKey(Currency, on_delete=models.DO_NOTHING)
     price = models.IntegerField()
@@ -60,6 +60,7 @@ class Listing(models.Model):
     floor_plan_image4 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     floor_plan_image5 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     photo_main = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    video = models.FileField(upload_to='videos/%Y/%m/%d/', blank=True, null=True)
     def __str__(self):
         return self.title
     class Meta:

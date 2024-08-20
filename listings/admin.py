@@ -27,6 +27,7 @@ class ShowAdmin(admin.ModelAdmin):
     list_editable = ('is_published', 'is_featured', 'is_for_rent')
     search_fields = ('title', 'description', 'address', 'city', 'price')
     list_per_page = 25
+    # fields = ('realtor', 'title', 'address', 'city', 'description', 'video', 'photo_main', 'list_date')
 
     def save_related(self, request, form, formsets, change):
         super().save_related(request, form, formsets, change)
