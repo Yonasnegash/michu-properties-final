@@ -90,6 +90,15 @@
                             </ul>
                         </div>
                     </div>
+                    <h4 class="mb-30">Amenities</h4>
+                    <ul class="feature-list">
+                        {% for feature in listing.feature %}
+                            <li>
+                                <div class="feature-checkbox"></div>
+                                <span>{{ feature }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
 
                     <!-- Video Content Begins here -->
                     {% if listing.video %}
@@ -196,10 +205,8 @@
                             <div class="agent-info">
                                 <h4>{{ listing.realtor }}</h4>
                                 <!-- Agent Contact -->
-                                <div class="agent-contact d-flex justify-content-between">
                                 <p>Phone: <span>{{ listing.realtor.phone }}</span></p>
-                                    <p>Email: <span>{{ listing.realtor.email }}</span></p>
-                                </div>
+                                <p>Email: <span>{{ listing.realtor.email }}</span></p>
                                 <p> {{ listing.realtor.description }} </p>
                                 <button class="btn rehomes-btn mt-10" data-toggle="modal" data-target="#inquiryModal">Make Request</button>
                             </div>

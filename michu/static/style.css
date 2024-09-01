@@ -1085,6 +1085,11 @@ input:invalid {
     background-color: #bf272d;
     -webkit-box-shadow: 0 0 20px rgba(115, 105, 215, 0.15);
     box-shadow: 0 0 20px rgba(115, 105, 215, 0.15); }
+  .single-sister-company-content:hover, .single-sister-company-content:focus {
+    background-color: #ffffff;
+    -webkit-box-shadow: 0 0 20px rgba(115, 105, 215, 0.15);
+    box-shadow: 0 0 20px rgba(115, 105, 215, 0.15);
+  }
     .single-choose-us-content:hover .choose-us-icon i,
     .single-choose-us-content:hover h5,
     .single-choose-us-content:hover p, .single-choose-us-content:focus .choose-us-icon i,
@@ -2860,5 +2865,38 @@ input:invalid {
   height: 4px; }
   .rehomes-property-sidebar-area .property-search-form-area .slider-range .ui-slider-horizontal .ui-slider-handle {
     margin-left: 0; }
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+  }
+
+  .feature-list li {
+      display: flex;
+      align-items: center;
+  }
+
+  .feature-checkbox {
+      width: 16px;
+      height: 16px;
+      background-color: green;
+      border-radius: 3px;
+      margin-right: 8px;
+      position: relative;
+  }
+
+  .feature-checkbox::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 5px;
+      width: 4px;
+      height: 8px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+  }
 
 /*# sourceMappingURL=style.css.map */
