@@ -154,8 +154,6 @@
                                     <div class="property-info-area d-flex flex-wrap">
                                         <p>Sq Meter: <span>{{ listing.property_size }} m2</span></p>
                                         <p>Garage: <span>{{ listing.garage }}</span></p>
-                                        <p>Bedrooms: <span>{{ listing.bedrooms }}</span></p>
-                                        <p>Baths: <span>{{ listing.bathrooms }}</span></p>
                                     </div>
                                     <p><span>{{ listing.list_date | timesince }}</span> ago</p>
                                 </div>
@@ -167,7 +165,16 @@
                                         <p class="price">{{ listing.price | intcomma }} {{ listing.currency.name }} per Month</p>
                                     {% else %}
                                         <a class="badge-sale" href="{% url 'listing' listing.id %}">For Sale</a>
-                                        <p class="price">{{ listing.price | intcomma }} {{ listing.currency.name }}</p>
+                                        <!-- <p class="price">{{ listing.price | intcomma }} {{ listing.currency.name }}</p> -->
+                                        <p class="price">
+                                            {% with prices=listing.calculate_price %}
+                                                {% if prices|length == 1 %}
+                                                    {{ prices.0|intcomma }} ETB
+                                                {% else %}
+                                                    {{ prices|first|intcomma }} - <br>{{ prices|last|intcomma }} ETB
+                                                {% endif %}
+                                            {% endwith %}
+                                        </p>
                                     {% endif %}
                                 </div>
                             </div>
