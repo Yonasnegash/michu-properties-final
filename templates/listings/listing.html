@@ -40,19 +40,30 @@
                 <div class="properties-location">
                     <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{ listing.address }}</p>
                     <p>Type: {{ listing.property_type }}</p>
+                    <p>{% if listing.discount %}
+                        <span style="background-color: green; color: white; padding: 5px 10px; border-radius: 3px;">On Discount</span>
+                    {% endif %}</p>
                 </div>
                 {% if listing.is_for_rent %}
                     <h4 class="properties-rate">${{ listing.price | intcomma }} <span>Per Month</span></h4>
                 {% else %}
-                    <h4 class="properties-rate">{{ listing.price | intcomma }} <span>Birr</span></h4>
+                {% if prices|length == 1 %}
+                    <h4 class="properties-rate">{{ prices.0|intcomma }} ETB</h4>
+                {% else %}
+                    <h5 class="properties-rate">{{ prices|first|intcomma }} ETB - {{ prices|last|intcomma }} ETB</h5>
+                {% endif %}
+                
                 {% endif %}
                 <!-- <p>Buy Confidence, Sell With Success! Our storied approach to real estate development and maximization.</p> -->
                 <!-- Properties Info -->
                 <div class="properties-info">
-                    <p>Sq Meter: <span>{{ listing.property_size }} m2</span></p>
-                    <p>Bedrooms: <span>{{ listing.bedrooms }}</span></p>
-                    <p>Garage: <span>{{ listing.garage }}</span></p>
-                    <p>Bathrooms: <span>{{ listing.bathrooms }}</span></p>
+                    <p>Price per Sq Meter: <span>{{ listing.price_per_sqm | intcomma }}</span> <span>{{ listing.currency }}</span></p>
+                    <p>Garage: <span>{{ listing.garage}} </span></p>
+                    {% for size in sizes %}
+                    <p>Sq Meter: <span>{{ size.size }} m²</span></p>
+                    <p>Bedrooms: <span>{{ size.bedrooms }}</span></p>
+                    <p>Bathrooms: <span>{{ size.bathrooms }}</span></p>
+                    {% endfor %}
                 </div>
                 <hr>
                 <p>{{ listing.description }}</p>
@@ -78,8 +89,6 @@
                                 <li><span>Price</span> <span>{{ listing.price | intcomma }} Birr</span></li>
                                 <li><span>Property Type</span> <span>{{ listing.property_type }}</span></li>
                                 <li><span>Rooms</span> <span>{{ listing.total_rooms }}</span></li>
-                                <li><span>Bedrooms</span> <span>{{ listing.bedrooms }}</span></li>
-                                <li><span>Bathrooms</span> <span>{{ listing.bathrooms }}</span></li>
                                 <li><span>Parking lots</span> <span>{{ listing.parking_lot }}</span></li>
                                 <li><span>Agent</span> <span>{{ listing.realtor }}</span></li>
                                 <li><span>City</span> <span>{{ listing.city }}</span></li>

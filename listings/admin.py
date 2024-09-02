@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Listing, PropertyMultiplePhoto
+from .models import Listing, PropertyMultiplePhoto, PropertySize
 from .forms import ShowAdminForm
 from django.template.loader import get_template
 from django.utils.translation import gettext as _
@@ -17,15 +17,19 @@ class ShowPhotoInline(admin.TabularInline):
 
     showphoto_thumbnail.short_description = _("Thumbnail")
 
+class PropertySizeInline(admin.TabularInline):
+    model = PropertySize
+    extra = 1  # How many empty fields to show in the admin form
+
 @admin.register(Listing)
 class ShowAdmin(admin.ModelAdmin):
     form = ShowAdminForm
-    inlines = [ShowPhotoInline]
-    list_display = ('id', 'title', 'is_published', 'is_featured','price', 'is_for_rent', 'list_date', 'realtor')
+    inlines = [PropertySizeInline, ShowPhotoInline]
+    list_display = ('id', 'title', 'is_published', 'is_featured', 'is_for_rent', 'list_date', 'realtor')
     list_display_links = ('id', 'title')
     list_filter = ('realtor',)
     list_editable = ('is_published', 'is_featured', 'is_for_rent')
-    search_fields = ('title', 'description', 'address', 'city', 'price')
+    search_fields = ('title', 'description', 'address', 'city',)
     list_per_page = 25
     # fields = ('realtor', 'title', 'address', 'city', 'description', 'video', 'photo_main', 'list_date')
 

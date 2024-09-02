@@ -1089,6 +1089,7 @@ input:invalid {
     background-color: #ffffff;
     -webkit-box-shadow: 0 0 20px rgba(115, 105, 215, 0.15);
     box-shadow: 0 0 20px rgba(115, 105, 215, 0.15);
+    align-items: center;
   }
     .single-choose-us-content:hover .choose-us-icon i,
     .single-choose-us-content:hover h5,

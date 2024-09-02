@@ -26,6 +26,8 @@ def index(request):
 def listing(request, listing_id):
     photos = PropertyMultiplePhoto.objects.all
     listing = get_object_or_404(Listing, pk=listing_id)
+    prices = listing.calculate_price()
+    sizes = listing.sizes.all()
     recent_listins = Listing.objects.order_by('-list_date').filter(is_published=True)[:3]
 
     context = {
@@ -36,7 +38,9 @@ def listing(request, listing_id):
         'city_choices': city_choices,
         'sqft_choices': sqft_choices,
         'recent_listings': recent_listins,
-        'photos': photos
+        'photos': photos,
+        'prices': prices,
+        'sizes': sizes
     }
     return render(request, 'listings/listing.html', context)
 
